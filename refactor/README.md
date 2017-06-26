@@ -2,6 +2,7 @@
 
 ## Demo
 * http://rchgrca.io/gilded-rose-kata/refactor/
+* http://rchgrca.io/gilded-rose-kata/refactor/index.fail.html
 
 ## Learned
 * current implication is difficult to read and debug
