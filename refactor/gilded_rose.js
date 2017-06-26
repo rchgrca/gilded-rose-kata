@@ -92,18 +92,17 @@ function update_quality() {
             continue
         }
 
+        if(isProductsQualityImprove(items[i])){
+            items[i].quality = incrementQuality(items[i])
+            items[i].quality = setQualityBounds(items[i])
+            continue
+        }
+
         if (items[i].sell_in < 0) {
-            if(isProductsQualityImprove(items[i])){
-                items[i].quality = incrementQuality(items[i])
-            } else {
-                items[i].quality = decrementQualityTwice(items[i])
-            }
+            items[i].quality = decrementQualityTwice(items[i])
+
         } else {
-            if(isProductsQualityImprove(items[i])){
-                items[i].quality = incrementQuality(items[i])
-            } else {
-                items[i].quality = decrementQualityOnce(items[i])
-            }
+            items[i].quality = decrementQualityOnce(items[i])
         }
 
         items[i].quality = setQualityBounds(items[i])
