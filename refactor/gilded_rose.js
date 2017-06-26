@@ -5,7 +5,7 @@ function Item(name, sell_in, quality) {
 }
 
 function isProductsQualityBackstage(o){
-    return o.name == 'Backstage passes to a TAFKAL80ETC concert'
+    return ['Backstage passes to a TAFKAL80ETC concert'].includes(o.name)
 }
 
 function isProductsQualityFixed(o){
