@@ -84,7 +84,6 @@ function decrementSellIn(o){
 
 function update_quality() {
     for (var i = 0; i < items.length; i++) {
-
         items[i].sell_in = decrementSellIn(items[i])
 
         if (isProductsQualityFixed(items[i])){
