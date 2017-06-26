@@ -1,5 +1,8 @@
 # Gilded Rose Kata
 
+## Demo
+* http://rchgrca.io/gilded-rose-kata/
+
 ## Approach
 
 * We are working with a small inn
@@ -49,6 +52,6 @@
 ## Learned
 * current implication is difficult to read and debug
   * multiple nested ifs make it difficult to separate business functionality from product types
-  * the most important function, decrementing 'sell_in', occurs in the middle of each iteration. 
+  * the most important function, decrementing 'sell_in', occurs in the middle of each iteration.
   * refactor should be based on functionality first, then product types
   * remove nested ifs on next refactor to make code easier to read

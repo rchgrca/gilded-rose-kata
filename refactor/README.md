@@ -1,5 +1,8 @@
 # Gilded Rose Kata REFACTOR
 
+## Demo
+* http://rchgrca.io/gilded-rose-kata/refactor/
+
 ## Learned
 * current implication is difficult to read and debug
   * multiple nested ifs make it difficult to separate business functionality from product types
