@@ -206,13 +206,26 @@ The quality of an item is never negative
         }
 ]
 
+
+
+
 update_quality()
 
+var li = []
 for (var i=0;i<items.length;i++){
-    console.log(
-        items[i].name == cases[i].name,
-        items[i].sell_in == cases[i].sell_in,
-        items[i].quality == cases[i].quality,
-        items[i]
-    )
+    var s = (
+                items[i].name == cases[i].name &&
+                items[i].sell_in == cases[i].sell_in &&
+                items[i].quality == cases[i].quality
+            ) ?
+            "<span>Pass</span>" :
+            `<b>Failed:</b> <i>${items[i].name}</i>  `
+
+    li.push(`<li>${s}</li>`)
+
+    console.log(s,items[i])
+}
+
+window.onload = function(){
+    document.getElementById("testcases").innerHTML = li.join('')
 }
