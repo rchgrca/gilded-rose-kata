@@ -32,13 +32,13 @@ function setQualityMin(o){
     return o.quality < 0 ? 0 : o.quality
 }
 
-function seQualityMax(o){
+function setQualityMax(o){
     return o.quality > 50 ? 50 : o.quality
 }
 
 function setQualityBounds(o){
     o.quality = setQualityMin(o)
-    o.quality = seQualityMax(o)
+    o.quality = setQualityMax(o)
     return o.quality
 }
 
@@ -93,15 +93,8 @@ function update_quality() {
 
         if(isProductsQualityImprove(items[i])){
             items[i].quality = incrementQuality(items[i])
-            items[i].quality = setQualityBounds(items[i])
-            continue
-        }
-
-        if (items[i].sell_in < 0) {
-            items[i].quality = decrementQualityTwice(items[i])
-
         } else {
-            items[i].quality = decrementQualityOnce(items[i])
+            items[i].quality = items[i].sell_in < 0 ? decrementQualityTwice(items[i]) : decrementQualityOnce(items[i])
         }
 
         items[i].quality = setQualityBounds(items[i])

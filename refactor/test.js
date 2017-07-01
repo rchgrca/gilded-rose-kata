@@ -220,10 +220,7 @@ for (var i=0;i<items.length;i++){
             ) ?
             "<span>Pass</span>" :
             `<b>Failed:</b> <i>${items[i].name}</i>  `
-
     li.push(`<li>${s}</li>`)
-
-    console.log(s,items[i])
 }
 
 window.onload = function(){
