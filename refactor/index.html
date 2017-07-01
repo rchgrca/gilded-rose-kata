@@ -1,16 +1,58 @@
 <html>
     <head>
-        <style>
-            body {background:black;color:white;font-family:arial}
-            b {color:red}
-            li {padding:10px}
-            span {color: #32CD32}
-        </style>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.4/jasmine.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.4/jasmine.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.4/jasmine-html.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.4/boot.js"></script>
+
         <script src="gilded_rose.js"></script>
         <script src="test.js"></script>
+        <script>
+            describe("A suite of test cases for the gilded-rose-kata", function() {
+
+                it("contains 5 different types", function() {
+                    expect(Object.keys(type).length).toEqual(5)
+                })
+
+                it("has a specific string for each type", function(){
+                    expect(type.normal).toEqual("Normal")
+                    expect(type.conjured).toEqual("Conjured")
+                    expect(type.backstage).toEqual("Backstage passes to a TAFKAL80ETC concert")
+                    expect(type.brie).toEqual("Aged Brie")
+                    expect(type.sulfuras).toEqual("Sulfuras, Hand of Ragnaros")
+                })
+
+                it("contains an array of 16 test items", function() {
+                    expect(items.length).toEqual(16);
+                })
+
+                it("contains an array of 16 test cases", function() {
+                    expect(cases.length).toEqual(items.length);
+                })
+
+                describe("loops through each test case", function() {
+
+                    update_quality()
+
+                    function testcase(item = {}, testcase = {}, i = 0){
+                        it(`case ${i+1}: ${testcase.test}`, function() {
+                            expect(testcase.name).toEqual(item.name)
+                            expect(testcase.sell_in).toEqual(item.sell_in)
+                            expect(testcase.quality).toEqual(item.quality)
+                        })
+                    }
+
+                    for (var i=0;i<items.length;i++){
+                        testcase(items[i], cases[i], i)
+                    }
+
+                })
+
+            });
+
+        </script>
     </head>
     <body>
-        <h3>Test Cases: Gilded Rose Kata</h3>
-        <ol id="testcases" start="0"></ol>
+
     </body>
 </html>

@@ -1,26 +1,28 @@
-var normal = "Normal",
-  conjured = "Conjured",
- backstage = "Backstage passes to a TAFKAL80ETC concert",
-      brie = "Aged Brie",
-  sulfuras = "Sulfuras, Hand of Ragnaros"
+var type = {
+    normal:"Normal",
+    conjured:"Conjured",
+    backstage:"Backstage passes to a TAFKAL80ETC concert",
+    brie:"Aged Brie",
+    sulfuras:"Sulfuras, Hand of Ragnaros"
+}
 
 var items = [
-    new Item(normal,30,30),
-    new Item(normal,0,46),
-    new Item(conjured,0,46),
-    new Item(backstage,0,46),
-    new Item(brie,0,46),
-    new Item(brie,30,30),
-    new Item(brie,1,50),
-    new Item(brie,1,80),
-    new Item(backstage,1,50),
-    new Item(sulfuras,30,30),
-    new Item(backstage,1,49),
-    new Item(backstage,0,49),
-    new Item(backstage,11,30),
-    new Item(backstage,6,30),
-    new Item(conjured,2,2),
-    new Item(normal,0,0)
+    new Item(type.normal,30,30),
+    new Item(type.normal,0,46),
+    new Item(type.conjured,0,46),
+    new Item(type.backstage,0,46),
+    new Item(type.brie,0,46),
+    new Item(type.brie,30,30),
+    new Item(type.brie,1,50),
+    new Item(type.brie,1,80),
+    new Item(type.backstage,1,50),
+    new Item(type.sulfuras,30,30),
+    new Item(type.backstage,1,49),
+    new Item(type.backstage,0,49),
+    new Item(type.backstage,11,30),
+    new Item(type.backstage,6,30),
+    new Item(type.conjured,2,2),
+    new Item(type.normal,0,0)
 ]
 
 var cases = [
@@ -34,7 +36,8 @@ var cases = [
     EXPECTED:
 */
         {
-            name:normal,
+            test:"sell_in decrements by 1",
+            name:type.normal,
             sell_in:29,
             quality:29
         },
@@ -42,7 +45,7 @@ var cases = [
 ********************************************************************************
 "Once the sell by date has passed, quality degrades twice as fast"
 
-    - TEST (sell-in > 0, decrement quality by 2):
+    - TEST (sell-in < 0, decrement quality by 2):
         [1] new Item("Normal",0,46)
         [2] new Item("Conjured",0,46)
         [3] new Item("Backstage passes to a TAFKAL80ETC concert",0,46)
@@ -51,22 +54,26 @@ var cases = [
     - EXPECTED:
 */
         {
-            name: normal,
+            test: "sell_in < 0, 'normal' quality decrements twice as fast, by 2",
+            name: type.normal,
             quality: 44,
             sell_in: -1
         },
         {
-            name: conjured,
+            test: "sell_in < 0, 'conjured' quality decrements twice as fast, by 4",
+            name: type.conjured,
             quality: 42,
             sell_in: -1
         },
         {
-            name: backstage,
+            test: "sell_in < 0, 'backstage' quality goes to 0",
+            name: type.backstage,
             quality: 0,
             sell_in: -1
         },
         {
-            name: brie,
+            test: "sell_in < 0, 'brie' increases quality by 1",
+            name: type.brie,
             quality: 47,
             sell_in: -1
         },
@@ -81,7 +88,8 @@ var cases = [
     EXPECTED:
 */
         {
-            name: brie,
+            test: "sell_in decrements but stays > 0, 'brie' increases quality by 1",
+            name: type.brie,
             quality: 31,
             sell_in: 29
         },
@@ -98,17 +106,20 @@ The quality of an item is never more than 50
     EXPECTED:
 */
         {
-            name: brie,
+            test: "quality > 50, 'brie' = 50 ",
+            name: type.brie,
             quality: 50,
             sell_in: 0
         },
         {
-            name: brie,
+            test: "quality = 80, 'brie' = 50 ",
+            name: type.brie,
             quality: 50,
             sell_in: 0
         },
         {
-            name: backstage,
+            test: "quality = 50, 'backstage' sell_in = 0 (day of concert) = 50 ",
+            name: type.backstage,
             quality: 50,
             sell_in: 0
         },
@@ -123,7 +134,8 @@ The quality of an item is never more than 50
     EXPECTED:
 */
         {
-            name: sulfuras,
+            test: "quality = 80, sulfuras always ",
+            name: type.sulfuras,
             quality: 80,
             sell_in: 0
         },
@@ -139,7 +151,8 @@ there are 5 days or less but quality drops to 0 after the concert
     EXPECTED:
 */
         {
-            name: backstage,
+            test: "quality increments by 1, 'backstage' as sell_in decreases > 0",
+            name: type.backstage,
             quality: 50,
             sell_in: 0
         },
@@ -150,7 +163,8 @@ there are 5 days or less but quality drops to 0 after the concert
     EXPECTED:
 */
         {
-            name: backstage,
+            test: "quality = 0, 'backstage' sell_in = -1 (day after concert)",
+            name: type.backstage,
             quality: 0,
             sell_in: -1
         },
@@ -161,7 +175,8 @@ there are 5 days or less but quality drops to 0 after the concert
     EXPECTED:
 */
         {
-            name: backstage,
+            test: "quality increase by 2, 'backstage' sell_in < 11",
+            name: type.backstage,
             quality: 32,
             sell_in: 10
         },
@@ -172,7 +187,8 @@ there are 5 days or less but quality drops to 0 after the concert
     EXPECTED:
 */
         {
-            name: backstage,
+            test: "quality increase by 3, 'backstage' sell_in < 6",
+            name: type.backstage,
             quality: 33,
             sell_in: 5
         },
@@ -186,7 +202,8 @@ there are 5 days or less but quality drops to 0 after the concert
     EXPECTED:
 */
         {
-            name: conjured,
+            test: "quality decrease by 2, 'conjured' always",
+            name: type.conjured,
             quality: 0,
             sell_in: 1
         },
@@ -200,29 +217,9 @@ The quality of an item is never negative
     EXPECTED:
 */
         {
-            name: normal,
+            test: "quality is never negative, 'normal' sell_in < 0",
+            name: type.normal,
             quality: 0,
             sell_in: -1
         }
 ]
-
-
-
-
-update_quality()
-
-var li = []
-for (var i=0;i<items.length;i++){
-    var s = (
-                items[i].name == cases[i].name &&
-                items[i].sell_in == cases[i].sell_in &&
-                items[i].quality == cases[i].quality
-            ) ?
-            "<span>Pass</span>" :
-            `<b>Failed:</b> <i>${items[i].name}</i>  `
-    li.push(`<li>${s}</li>`)
-}
-
-window.onload = function(){
-    document.getElementById("testcases").innerHTML = li.join('')
-}
